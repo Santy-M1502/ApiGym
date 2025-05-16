@@ -26,6 +26,7 @@ func InitDB(){
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nombre TEXT,
 		descripcion TEXT,
+		repeticiones INTEGER,
 		usuario_id INTEGER,
 		FOREIGN KEY(usuario_id) REFERENCES users(id)
 	);`
