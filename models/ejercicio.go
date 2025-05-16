@@ -40,6 +40,32 @@ func CrearEjercicio(e *Ejercicio) error {
 	return err
 }
 
+func ActualizarEjercicio(e *Ejercicio) error {
+    // Actualiza solo si el ejercicio pertenece al usuario
+    query := `UPDATE ejercicios SET nombre = ?, descripcion = ?, repeticiones = ? WHERE id = ? AND user_id = ?`
+    stmt, err := DB.Prepare(query)
+    if err != nil {
+        return err
+    }
+    defer stmt.Close()
+
+    res, err := stmt.Exec(e.Nombre, e.Descripcion, e.Repeticiones, e.ID, e.UsuarioID)
+    if err != nil {
+        return err
+    }
+
+    affected, err := res.RowsAffected()
+    if err != nil {
+        return err
+    }
+
+    if affected == 0 {
+        return fmt.Errorf("ejercicio no encontrado o no autorizado")
+    }
+
+    return nil
+}
+
 func EliminarEjercicio(id int, userID int) error{
 	query := `DELETE FROM
 	ejercicios WHERE id = ? AND usuario_id = ?`

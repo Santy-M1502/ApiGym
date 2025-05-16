@@ -68,3 +68,44 @@ func DelEjercicio(w http.ResponseWriter, r *http.Request){
     }
     w.WriteHeader(http.StatusNoContent)
 }
+
+func ActEjercicio(w http.ResponseWriter, r *http.Request) {
+    vars := mux.Vars(r)
+    idStr := vars["id"]
+    id, err := strconv.Atoi(idStr)
+    if err != nil {
+        http.Error(w, "ID inválido", http.StatusBadRequest)
+        return
+    }
+
+    userIDRaw := r.Context().Value("userID")
+    var userID int
+    switch v := userIDRaw.(type) {
+    case int:
+        userID = v
+    case float64:
+        userID = int(v)
+    default:
+        http.Error(w, "No autorizado", http.StatusUnauthorized)
+        return
+    }
+
+    var e models.Ejercicio
+    if err := json.NewDecoder(r.Body).Decode(&e); err != nil {
+        http.Error(w, "JSON inválido", http.StatusBadRequest)
+        return
+    }
+
+    // Asegurarse que el ejercicio pertenece al usuario
+    e.ID = id
+    e.UsuarioID = userID
+
+    err = models.ActualizarEjercicio(&e)
+    if err != nil {
+        http.Error(w, "No se pudo actualizar ejercicio", http.StatusInternalServerError)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
+    json.NewEncoder(w).Encode(e)
+}
