@@ -57,7 +57,6 @@ func DelEjercicio(w http.ResponseWriter, r *http.Request){
     case float64:
         userID = int(v)
     default:
-        fmt.Printf("%T", userIDRaw)
         http.Error(w, "Tipo invalido de user_id", http.StatusUnauthorized)
         return
     }
