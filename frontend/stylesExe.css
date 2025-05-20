@@ -1,0 +1,68 @@
+/* stylesExe.css */
+
+body {
+    margin: 0;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #222;
+}
+
+form#addForm {
+    background-color: #fff;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+form#addForm input {
+    flex: 1 1 45%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.3s;
+}
+
+form#addForm input:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+form#addForm button {
+    flex: 1 1 100%;
+    padding: 0.75rem;
+    background-color: #28a745;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form#addForm button:hover {
+    background-color: #218838;
+}
+
+#data {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    min-height: 100px;
+}

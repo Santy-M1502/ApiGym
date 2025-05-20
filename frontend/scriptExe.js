@@ -63,7 +63,7 @@ const createExe = (nombre, descripcion, repeticiones) =>{
 
 const deleteExe = (id) =>{
   const token = localStorage.getItem("token");
-  fetch(`http://localhost:8080/ejercicios/${id})`,{
+  fetch(`http://localhost:8080/ejercicios/${id}`,{
     method: "DELETE",
         headers: {
           "Authorization": "Bearer " + token,

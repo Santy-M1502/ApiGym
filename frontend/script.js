@@ -14,7 +14,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         // Guardar token en localStorage (si usás JWT, por ejemplo)
         localStorage.setItem("token", data.token);
         // Redirigir a la nueva página
