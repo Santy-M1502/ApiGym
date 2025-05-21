@@ -2,10 +2,12 @@ package middleware
 
 import (
 	"context"
-    "net/http"
-    "os"
-    "strings"
-    "github.com/golang-jwt/jwt/v5"
+	"fmt"
+	"net/http"
+	"os"
+	"strings"
+
+	"github.com/golang-jwt/jwt/v5"
 )
 func AuthMiddleware(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -17,6 +19,9 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
         tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
         token, err := jwt.Parse(tokenStr, func(t *jwt.Token) (interface{}, error) {
+            if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok{
+                return nil, fmt.Errorf("metodo de firma inesperado %v", t.Header["alg"])
+            }
             return []byte(os.Getenv("JWT_SECRET")), nil
         })
 

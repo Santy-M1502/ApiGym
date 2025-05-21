@@ -22,3 +22,21 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         alert("Login incorrecto");
       }
     });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('toggleMode');
+  const body = document.body;
+
+  // Aplica tema guardado
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+    toggleBtn.textContent = '☀️ Modo Claro';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const isDark = body.classList.contains('dark');
+    toggleBtn.textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+});

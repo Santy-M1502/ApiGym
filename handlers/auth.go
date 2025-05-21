@@ -14,6 +14,12 @@ func Register(w http.ResponseWriter, r *http.Request) {
     var user models.User
     json.NewDecoder(r.Body).Decode(&user)
 
+    if user.Email == "" || user.Password == "" {
+	http.Error(w, "Email y contraseña requeridos", http.StatusBadRequest)
+	return
+    }
+
+
     hashed, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
     if err != nil {
         http.Error(w, "Error al encriptar", http.StatusInternalServerError)
@@ -52,6 +58,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
         "exp":     time.Now().Add(time.Hour * 24).Unix(),
     })
 
-    tokenString, _ := token.SignedString(jwtKey)
+    tokenString, err := token.SignedString(jwtKey)
+    if err != nil {
+	http.Error(w, "Error al generar token", http.StatusInternalServerError)
+	return
+    }
     json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
 }

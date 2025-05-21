@@ -1,68 +1,105 @@
-/* stylesExe.css */
+/* Variables por defecto (modo claro) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #fff;
+  --input-border: #ccc;
+  --input-focus: #28a745;
+  --btn-bg: #28a745;
+  --btn-bg-hover: #218838;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
 
+/* Variables para modo oscuro */
+body.dark {
+  --bg-color: #1e1e1e;
+  --text-color: #f9f9f9;
+  --card-bg: #2c2c2c;
+  --input-border: #555;
+  --input-focus: #00c46a;
+  --btn-bg: #00c46a;
+  --btn-bg-hover: #00a65a;
+  --shadow: rgba(255, 255, 255, 0.08);
+}
+
+/* Estilos base usando variables */
 body {
-    margin: 0;
-    padding: 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f6f8;
-    color: #333;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #222;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-color);
 }
 
 form#addForm {
-    background-color: #fff;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+  background-color: var(--card-bg);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
 form#addForm input {
-    flex: 1 1 45%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: border 0.3s;
+  flex: 1 1 45%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  transition: border 0.3s, background-color 0.3s, color 0.3s;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 form#addForm input:focus {
-    border-color: #28a745;
-    outline: none;
+  border-color: var(--input-focus);
+  outline: none;
 }
 
 form#addForm button {
-    flex: 1 1 100%;
-    padding: 0.75rem;
-    background-color: #28a745;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  flex: 1 1 100%;
+  padding: 0.75rem;
+  background-color: var(--btn-bg);
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 form#addForm button:hover {
-    background-color: #218838;
+  background-color: var(--btn-bg-hover);
 }
 
 #data {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    min-height: 100px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px var(--shadow);
+  min-height: 100px;
+  color: var(--text-color);
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--btn-bg);
+  color: white;
 }
