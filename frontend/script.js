@@ -62,13 +62,37 @@ window.addEventListener("click", (e) => {
 
 document.getElementById("formForgot").addEventListener("submit", (e) => {
   e.preventDefault();
-
   const emailInput = document.getElementById("email-forgot");
-  if (emailInput.checkValidity()) {
     const email = emailInput.value;
     alert(`Se envió un correo a: ${email}`);
     document.getElementById("modalForgot").style.display = "none";
-  } else {
-    emailInput.reportValidity(); 
-  }
 });
+
+
+
+document.getElementById("formForgot").addEventListener("submit", (e) => {
+  e.preventDefault(); // evita recargar la página
+
+  const email = document.getElementById("email-forgot").value;
+
+  fetch("http://localhost:8080/verificar-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    "Authorization": "Bearer " + localStorage.getItem("token"),
+    body: JSON.stringify({ email: email })
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.existe) {
+        alert("El correo está registrado. Se enviará un email.");
+        // Aquí podrías ocultar el modal o avanzar al siguiente paso
+      } else {
+        alert("Ese correo no está registrado.");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Error al verificar el correo.");
+    });
+});
+

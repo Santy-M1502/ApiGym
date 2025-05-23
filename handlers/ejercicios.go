@@ -109,3 +109,35 @@ func ActEjercicio(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(e)
 }
+
+func VerificarEmailHandler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
+
+    var datos struct {
+        Email string `json:"email"`
+    }
+
+    if err := json.NewDecoder(r.Body).Decode(&datos); err != nil {
+    w.WriteHeader(http.StatusBadRequest)
+    json.NewEncoder(w).Encode(map[string]any{
+        "ok":    false,
+        "error": "Datos inválidos",
+    })
+    return
+    }
+
+
+    _, err := models.GetUserByEmail(datos.Email)
+    if err != nil {
+        json.NewEncoder(w).Encode(map[string]any{
+            "ok":     true,
+            "existe": false,
+        })
+        return
+    }
+
+    json.NewEncoder(w).Encode(map[string]any{
+        "ok":     true,
+        "existe": true,
+    })
+}
