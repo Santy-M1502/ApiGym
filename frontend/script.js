@@ -1,5 +1,6 @@
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
+  if (e.submitter.value == "send"){ 
+    e.preventDefault();
       
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
@@ -21,7 +22,11 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       } else {
         alert("Login incorrecto");
       }
-    });
+    }else if(e.submitter.value == "nosend"){
+      e.preventDefault();
+      console.log("Olvida la contrasena")
+    }})
+      
 
 document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('toggleMode');
@@ -39,4 +44,31 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn.textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
+});
+
+document.getElementById("abrirModal").addEventListener("click", () => {
+  document.getElementById("modalForgot").style.display = "flex";
+});
+
+document.querySelector(".modal .close").addEventListener("click", () => {
+  document.getElementById("modalForgot").style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("modalForgot");
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }})
+
+document.getElementById("formForgot").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const emailInput = document.getElementById("email-forgot");
+  if (emailInput.checkValidity()) {
+    const email = emailInput.value;
+    alert(`Se envió un correo a: ${email}`);
+    document.getElementById("modalForgot").style.display = "none";
+  } else {
+    emailInput.reportValidity(); 
+  }
 });
