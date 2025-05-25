@@ -1,7 +1,8 @@
 package models
 
 import (
-    "errors"
+	"errors"
+	"time"
 )
 
 
@@ -35,6 +36,26 @@ func GetUserByEmail(email string) (*User, error) {
     }
     return &u, nil
 }
+
+func SavePasswordResetToken(email, token string, duration time.Duration) error {
+    expiresAt := time.Now().Add(duration)
+    _, err := DB.Exec("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)",
+        email, token, expiresAt)
+    return err
+}
+
+func GetEmailByValidToken(token string) (string, error) {
+    var email string
+    var expiresAt time.Time
+
+    err := DB.QueryRow(`SELECT email, expires_at FROM password_resets WHERE token = ?`, token).
+        Scan(&email, &expiresAt)
+    if err != nil || time.Now().After(expiresAt) {
+        return "", errors.New("token inválido o expirado")
+    }
+    return email, nil
+}
+
 
 
 

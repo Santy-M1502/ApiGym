@@ -32,6 +32,10 @@ func main() {
 	r.Handle("/ejercicios/{id}", middleware.AuthMiddleware(http.HandlerFunc(handlers.ActEjercicio))).Methods("PUT")
 	r.Handle("/ejercicios/{id}", middleware.AuthMiddleware(http.HandlerFunc(handlers.DelEjercicio))).Methods("DELETE")
 	r.HandleFunc("/verificar-email", handlers.VerificarEmailHandler).Methods("POST")
+	r.HandleFunc("/api/resetear-password", handlers.ResetearPasswordHandler)
+
+	fs := http.FileServer(http.Dir("./frontend"))
+	r.PathPrefix("/").Handler(fs)
 
 	// Configurar CORS
 	c := cors.New(cors.Options{

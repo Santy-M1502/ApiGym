@@ -31,12 +31,23 @@ func InitDB(){
 		FOREIGN KEY(usuario_id) REFERENCES users(id)
 	);`
 
+	createResetTable := `CREATE TABLE IF NOT EXISTS password_resets (
+		email TEXT NOT NULL,
+		token TEXT NOT NULL,
+		expires_at DATETIME NOT NULL
+		);`
+
 	_, err = DB.Exec(createUserTable)
 	if err != nil{
 		log.Fatal(err)
 	}
 
 	_, err = DB.Exec(createEjercicioTable)
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	_, err = DB.Exec(createResetTable)
 	if err != nil{
 		log.Fatal(err)
 	}
