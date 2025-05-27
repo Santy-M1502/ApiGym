@@ -131,9 +131,54 @@ func ResetearPasswordHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // Borrar el token para que no pueda usarse otra vez
     models.DB.Exec("DELETE FROM password_resets WHERE token = ?", datos.Token)
 
     json.NewEncoder(w).Encode(map[string]any{"ok": true})
 }
 
+func VerificarEmailRegister(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
+
+    var datos struct {
+        Email string `json:"email"`
+        Password string `json:"password"`
+    }
+
+    bodyBytes, _ := io.ReadAll(r.Body)
+    r.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+
+    if err := json.NewDecoder(r.Body).Decode(&datos); err != nil {
+        fmt.Println("Error al decodificar JSON:", err)
+        w.WriteHeader(http.StatusBadRequest)
+        json.NewEncoder(w).Encode(map[string]any{
+            "ok":    false,
+            "error": "Datos inválidos",
+        })
+        return
+    }
+
+    if datos.Email == "" {
+        fmt.Println("Email vacío")
+        w.WriteHeader(http.StatusBadRequest)
+        json.NewEncoder(w).Encode(map[string]any{
+            "ok": false,
+            "error": "El email está vacío",
+        })
+        return
+    }
+
+    _, err := models.GetUserByEmail(datos.Email)
+    if err != nil {
+        json.NewEncoder(w).Encode(map[string]any{
+            "ok":     true,
+            "existe": false,
+        })
+        return
+    }
+
+    json.NewEncoder(w).Encode(map[string]any{
+        "ok":     true,
+        "existe": true,
+    })
+
+}

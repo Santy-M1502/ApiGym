@@ -59,7 +59,7 @@ body {
 }
 
 
-form#loginForm {
+form#loginForm, form#registerForm{
   background-color: var(--input-bg);
   padding: 2rem;
   border-radius: 12px;
@@ -70,7 +70,7 @@ form#loginForm {
   width: 300px;
 }
 
-form#loginForm input {
+form#loginForm input, form#registerForm input {
   padding: 0.75rem;
   font-size: 1rem;
   border: 1px solid var(--input-border);
@@ -80,12 +80,12 @@ form#loginForm input {
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
 
-form#loginForm input:focus {
+form#loginForm input:focus, form#registerForm input:focus{
   border-color: var(--input-focus-border);
   outline: none;
 }
 
-form#loginForm button {
+form#loginForm button ,form#registerForm button, .register, .login{
   padding: 0.75rem;
   background-color: var(--btn-bg);
   color: white;
@@ -96,7 +96,7 @@ form#loginForm button {
   transition: background-color 0.3s;
 }
 
-form#loginForm button:hover {
+form#loginForm button:hover form#registerForm button:hover{
   background-color: var(--btn-bg-hover);
 }
 
@@ -194,4 +194,22 @@ form#loginForm button:hover {
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+.loginBox{
+  display: flex;
+}
+
+.registerBox, .loginBox{
+  flex-direction: column;
+}
+
+.login{
+  width: 60%;
+  align-self: flex-start;
+}
+
+.register{
+  width: 60%;
+  align-self: flex-end;
 }

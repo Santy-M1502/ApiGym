@@ -99,3 +99,73 @@ document.getElementById("formForgot").addEventListener("submit", async (e) => {
     console.error("Error de red u otro:", err);
   }
 });
+
+const register = document.querySelector(".register")
+const login = document.querySelector(".login")
+const registerBox = document.querySelector(".registerBox")
+const loginBox = document.querySelector(".loginBox")
+
+register.addEventListener("click", ()=>{
+  registerBox.style.display = "flex"
+  loginBox.style.display = "none"
+})
+
+login.addEventListener("click", ()=>{
+  registerBox.style.display = "none"
+  loginBox.style.display = "flex"
+})
+
+document.getElementById("registerForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("emailReg").value;
+    const emailConfirm = document.getElementById("emailRegConfirm").value;
+    const pass = document.getElementById("passwordReg").value;
+    const passConfirm = document.getElementById("passwordRegConfirm").value;
+
+    if (!email || !emailConfirm || !pass || !passConfirm) {
+        alert("Por favor completá todos los campos");
+        return;
+    }
+
+    if (email !== emailConfirm) {
+        alert("Los emails no coinciden");
+        return;
+    }
+
+    if (pass !== passConfirm) {
+        alert("Las contraseñas no coinciden");
+        return;
+    }
+
+    const yaExiste = await verificarEmail(email);
+    if (yaExiste) {
+        alert("El email ya está registrado");
+        return;
+    }
+
+    const res = await fetch("http://localhost:8080/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password: pass }),
+    });
+
+    const data = await res.json();
+    console.log(data)
+    if (data.message == "Usuario registrado") {
+        alert("Usuario registrado con éxito");
+        document.getElementById("registerForm").reset();
+    } else {
+        alert("Error al registrar: " + data.error);
+    }
+});
+
+async function verificarEmail(email) {
+  const response = await fetch("http://localhost:8080/registrar-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  const data = await response.json();
+  return data.existe;
+}
