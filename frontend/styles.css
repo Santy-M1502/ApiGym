@@ -1,4 +1,6 @@
-/* Variables para modo claro */
+/* === VARIABLES === */
+
+/* Modo claro */
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
@@ -10,7 +12,7 @@
   --shadow: rgba(0, 0, 0, 0.15);
 }
 
-/* Variables para modo oscuro */
+/* Modo oscuro */
 body.dark {
   --bg-color: #1e1e1e;
   --text-color: #f9f9f9;
@@ -22,28 +24,9 @@ body.dark {
   --shadow: rgba(255, 255, 255, 0.1);
 }
 
-/* Mantengo todo igual excepto agrego: */
 
-#toggleMode {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background-color: transparent;
-  color: var(--text-color);
-  border: 2px solid var(--text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  z-index: 1000; /* que quede por encima */
-}
+/* === ESTILOS GENERALES === */
 
-#toggleMode:hover {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-}
-
-/* Para centrar el formulario y que el botón no lo afecte */
 body {
   margin: 0;
   padding: 20px;
@@ -58,8 +41,62 @@ body {
   height: 100vh;
 }
 
+.titles {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
 
-form#loginForm, form#registerForm{
+.loginBox,
+.registerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registerBox{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login {
+  width: 60%;
+  align-self: flex-start;
+}
+
+.register {
+  width: 60%;
+  align-self: flex-end;
+}
+
+
+/* === BOTÓN MODO OSCURO/CLARO === */
+
+#toggleMode {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  z-index: 1000;
+}
+
+#toggleMode:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+
+/* === FORMULARIOS === */
+
+form#loginForm,
+form#registerForm {
   background-color: var(--input-bg);
   padding: 2rem;
   border-radius: 12px;
@@ -70,7 +107,7 @@ form#loginForm, form#registerForm{
   width: 300px;
 }
 
-form#loginForm input, form#registerForm input {
+form input {
   padding: 0.75rem;
   font-size: 1rem;
   border: 1px solid var(--input-border);
@@ -80,12 +117,14 @@ form#loginForm input, form#registerForm input {
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
 
-form#loginForm input:focus, form#registerForm input:focus{
+form input:focus {
   border-color: var(--input-focus-border);
   outline: none;
 }
 
-form#loginForm button ,form#registerForm button, .register, .login{
+form button,
+.register,
+.login {
   padding: 0.75rem;
   background-color: var(--btn-bg);
   color: white;
@@ -96,40 +135,28 @@ form#loginForm button ,form#registerForm button, .register, .login{
   transition: background-color 0.3s;
 }
 
-form#loginForm button:hover form#registerForm button:hover{
+form button:hover,
+.register:hover,
+.login:hover {
   background-color: var(--btn-bg-hover);
 }
 
-/* Botón para toggle modo */
-#toggleMode {
-  margin-top: 20px;
-  background-color: transparent;
-  color: var(--text-color);
-  border: 2px solid var(--text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
 
-#toggleMode:hover {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-}
+/* === MODAL === */
 
-/* Modal general */
 .modal {
-  display: none; /* oculto por defecto */
+  display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   justify-content: center;
   align-items: center;
 }
 
-/* Contenido centrado */
 .modal-content {
   background-color: var(--input-bg);
   color: var(--text-color);
@@ -152,7 +179,8 @@ form#loginForm button:hover form#registerForm button:hover{
 
 .modal-content .close {
   position: absolute;
-  top: 10px; right: 15px;
+  top: 10px;
+  right: 15px;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -175,7 +203,7 @@ form#loginForm button:hover form#registerForm button:hover{
   outline: none;
 }
 
-.modal-content .send-email-forgot {
+.send-email-forgot {
   padding: 0.75rem;
   background-color: var(--btn-bg);
   color: white;
@@ -186,30 +214,39 @@ form#loginForm button:hover form#registerForm button:hover{
   transition: background-color 0.3s;
 }
 
-.modal-content .send-email-forgot:hover {
+.send-email-forgot:hover {
   background-color: var(--btn-bg-hover);
 }
 
-.titles{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
+/* === ANIMACIONES SOLO PARA PC === */
+@media (min-width: 768px) {
 
-.loginBox{
-  display: flex;
-}
+  /* Animación de entrada */
+  .animate-on-load {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideFadeIn 0.6s ease-out forwards;
+  }
 
-.registerBox, .loginBox{
-  flex-direction: column;
-}
+  @keyframes slideFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-.login{
-  width: 60%;
-  align-self: flex-start;
-}
+  /* Efecto en botones */
+  form button,
+  .register,
+  .login,
+  .send-email-forgot {
+    transition: background-color 0.3s, transform 0.2s;
+  }
 
-.register{
-  width: 60%;
-  align-self: flex-end;
+  form button:hover,
+  .register:hover,
+  .login:hover,
+  .send-email-forgot:hover {
+    transform: scale(1.05);
+  }
 }

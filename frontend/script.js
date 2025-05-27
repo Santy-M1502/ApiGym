@@ -1,3 +1,15 @@
+if (window.innerWidth >= 768) {
+  document.body.classList.add('spotlight');
+
+  window.addEventListener('mousemove', e => {
+    document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+    document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+  });
+} else {
+  document.body.classList.remove('spotlight');
+}
+
+
 // === LOGIN Y OLVIDÉ CONTRASEÑA ===
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
   if (e.submitter.value == "send") {

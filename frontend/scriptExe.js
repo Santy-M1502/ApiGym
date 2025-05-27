@@ -13,7 +13,7 @@ async function getProtectedData() {
         lista.innerHTML = ""
         data.forEach((element, index) => {
           var div = document.createElement("div")
-          div.classList.add("exercise_box")
+          div.classList.add("exercise_box", "animate-on-load")
           div.innerHTML = `
             <h3>Ejercicio: ${element.nombre}</h3>
             <p>Descripcion: ${element.descripcion}</p>
