@@ -52,6 +52,7 @@ body {
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -187,4 +188,10 @@ form#loginForm button:hover {
 
 .modal-content .send-email-forgot:hover {
   background-color: var(--btn-bg-hover);
+}
+
+.titles{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }

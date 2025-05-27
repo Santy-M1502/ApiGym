@@ -56,7 +56,6 @@ body {
   color: var(--bg-color);
 }
 
-/* Formulario de restablecimiento */
 form#resetForm {
   background-color: var(--input-bg);
   padding: 2rem;
@@ -109,4 +108,18 @@ form#resetForm button:hover {
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+
+#changeComplete{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  position: absolute;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px var(--shadow);
+  gap: 1rem;
+  width: 300px;
+  text-align: center;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  display: none;
 }

@@ -1,4 +1,6 @@
-document.getElementById("resetForm").addEventListener("submit", async function (e) {
+const modal = document.getElementById("changeComplete")
+const reset = document.getElementById("resetForm")
+reset.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -14,8 +16,14 @@ document.getElementById("resetForm").addEventListener("submit", async function (
       const data = await response.json();
       if (data.ok) {
         alert("Contraseña actualizada correctamente.");
-        window.location.href = "index.html"; // o login.html
+        window.location.href = "/index.html";
       } else {
         alert("Error: " + data.error);
       }
+    });
+
+const toggleBtn = document.getElementById('toggleMode');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
     });
