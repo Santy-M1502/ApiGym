@@ -7,7 +7,7 @@ reset.addEventListener("submit", async function (e) {
       const token = urlParams.get("token");
       const password = document.getElementById("newPassword").value;
 
-      const response = await fetch("http://localhost:8080/api/resetear-password", {
+      const response = await fetch("/api/resetear-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, password })

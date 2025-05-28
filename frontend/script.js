@@ -18,7 +18,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password })
@@ -91,7 +91,7 @@ document.getElementById("formForgot").addEventListener("submit", async (e) => {
   console.log("JSON enviado:", JSON.stringify({ email }));
 
   try {
-    const res = await fetch("http://localhost:8080/verificar-email", {
+    const res = await fetch("/verificar-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
@@ -156,7 +156,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         return;
     }
 
-    const res = await fetch("http://localhost:8080/register", {
+    const res = await fetch("/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password: pass }),
@@ -173,7 +173,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 });
 
 async function verificarEmail(email) {
-  const response = await fetch("http://localhost:8080/registrar-email", {
+  const response = await fetch("/registrar-email", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),

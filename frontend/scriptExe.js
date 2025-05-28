@@ -1,6 +1,6 @@
 async function getProtectedData() {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/ejercicios", {
+      const response = await fetch("/ejercicios", {
         method: "GET",
         headers: {
           "Authorization": "Bearer " + token
@@ -51,7 +51,7 @@ addExercise.addEventListener("submit", (e)=>{
 const createExe = (nombre, descripcion, repeticiones) =>{
   const token = localStorage.getItem("token");
   repeticiones = parseInt(repeticiones)
-  fetch("http://localhost:8080/ejercicios",{
+  fetch("/ejercicios",{
     method:"POST",
     headers: {
       "Authorization": "Bearer " + token,
@@ -63,7 +63,7 @@ const createExe = (nombre, descripcion, repeticiones) =>{
 
 const deleteExe = (id) =>{
   const token = localStorage.getItem("token");
-  fetch(`http://localhost:8080/ejercicios/${id}`,{
+  fetch(`/ejercicios/${id}`,{
     method: "DELETE",
         headers: {
           "Authorization": "Bearer " + token,

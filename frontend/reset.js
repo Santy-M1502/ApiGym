@@ -10,7 +10,7 @@ document.getElementById("resetForm").addEventListener("submit", async (e) => {
   }
 
 
-  const res = await fetch("http://localhost:8080/api/resetear-password", {
+  const res = await fetch("/api/resetear-password", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token, password: nuevaContrasena }),
