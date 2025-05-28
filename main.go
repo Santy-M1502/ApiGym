@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/joho/godotenv"
+	"os"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"ApiGym/handlers"
@@ -13,10 +13,10 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error cargando .env")
-	}
+	os.Getenv("DATABASE_URL")
+	os.Getenv("JWT_SECRET")
+	os.Getenv("PORT")
+
 
 	models.InitDB()
 
